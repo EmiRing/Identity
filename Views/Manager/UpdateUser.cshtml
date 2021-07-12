@@ -1,0 +1,54 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+@model DisplayUserViewModel
+
+<div class="row">
+    <div class="col-md-6">
+        <form id="profile-form" method="post">
+            <div asp-validation-summary="All" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="applicationUser.FirstName"></label>
+                <input asp-for="applicationUser.FirstName" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label asp-for="applicationUser.LastName"></label>
+                <input asp-for="applicationUser.LastName" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label asp-for="applicationUser.Email"></label>
+                <input asp-for="applicationUser.Email" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label asp-for="Password"></label>
+                <input asp-for="Password" class="form-control" />
+                <span asp-validation-for="Password" class="text-danger"></span>
+            </div>
+            <div>
+                <input type="checkbox" asp-for="isAdmin" checked="@Model.isAdmin"/> 
+                <label asp-for="isAdmin">Is Admin</label>
+            </div>
+            <input asp-for="applicationUser.Id" value="@Model.applicationUser.Id" hidden />
+            <div class="form-group">
+                <label asp-for="applicationUser.CityId"></label>
+                <select type="text" id="Gender" asp-for="applicationUser.CityId" class="form-control">
+                    <option value=""></option>
+                    @foreach (var city in Model.Cities)
+                    {
+                        if (city.Id == Model.applicationUser.CityId)
+                        {
+                            <option value="@city.Id" selected>@city.CityName</option>
+                        }
+                        else
+                        {
+                            <option value="@city.Id">@city.CityName</option>
+                        }
+                    }
+                </select>
+            </div>
+            <button id="update-profile-button" type="submit" class="btn btn-primary">Update</button>
+        </form>
+    </div>
+</div>

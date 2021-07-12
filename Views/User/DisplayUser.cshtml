@@ -1,0 +1,26 @@
+﻿@model DisplayUserViewModel
+
+<div class="d-flex justify-content-center" id="container">
+    <div class="wrapper">
+        <h2>@Model.applicationUser.FullName</h2>
+        <div class="form-group">
+            Email: @Model.applicationUser.Email
+        </div>
+        <div class="form-group">
+            City: @Model.City.CityName
+        </div>
+        <div class="form-group">
+            Country: @Model.Country.CountryName
+        </div>
+        <label asp-for="@Model.Roles">Roles:</label>
+        <ul>
+            @foreach (var role in Model.Roles)
+            {
+            <li>
+                @role
+            </li>
+            }
+        </ul>
+       
+    </div>
+    </div>

@@ -1,0 +1,60 @@
+﻿@{
+}
+@model CitySelectViewModel
+<h2>City Management</h2>
+<div class="row">
+    <div class="col-md-6">
+        <div asp-validation-summary="All" class="text-danger"></div>
+        <form id="profile-form" method="post">
+
+            <div class="form-group">
+                <label asp-for="Country.Id">Country</label>
+                <select type="text" id="Countryr" asp-for="Country.Id" class="form-control">
+
+                    @foreach (var country in Model.Countries)
+                    {
+                        if (country.Id == Model.Country.Id)
+                        {
+                            <option value="@country.Id" selected>@country.CountryName</option>
+                        }
+                        else
+                        {
+                            <option value="@country.Id">@country.CountryName</option>
+                        }
+                    }
+                </select>
+                <span asp-validation-for="Country.Id" class="text-danger"></span>
+            </div>
+            <button id="update-profile-button" type="submit" class="btn btn-primary">Select</button>
+            <a class="btn btn-primary" asp-controller="Manager" asp-action="EditCountry" asp-route-Id="@Model.Country.Id">Edit country</a>
+            <a class="btn btn-primary" asp-controller="Manager" asp-action="AddCountry">Add country</a>
+        </form>
+        
+    </div>
+    
+    <div class="col-md-6">
+        
+        <label asp-for="City">Cities</label>
+        <table class="table table-bordered table-sm">
+            @foreach (var city in Model.Cities)
+            {
+                <tr class="">
+                    <td class="col-6">
+                        @city.CityName
+                    </td>
+                    <td class="col-auto">
+                        <a class="btn btn-sm btn-primary" asp-controller="Manager" asp-action="DisplayCity" asp-route-Id="@city.Id">Update</a>
+                    </td>
+                    <td class="col-auto">
+                        <a class="btn btn-sm btn-danger" asp-controller="Manager" asp-action="DeleteCity" asp-route-Id="@city.Id">Delete</a>
+                    </td>
+
+
+                </tr>
+            }
+        </table>
+        <a class="btn btn-primary" asp-controller="Manager" asp-action="AddCity" asp-route-CountryId="@Model.Country.Id">Add new city</a>
+       
+    </div>
+</div>
+<div class="alert-danger">@Model.Message</div>
